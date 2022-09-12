@@ -4,7 +4,7 @@ import discord
 from cogs.crystal import CrystalView
 from discord.ext import commands
 
-GUILD = discord.Object(id=950937956682698862)
+GUILD = discord.Object(id=771811457498218519)
 
 from discord.ext import commands
 

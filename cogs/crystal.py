@@ -37,13 +37,13 @@ class Crystal(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(int(950937956682698865))
+        channel = self.bot.get_channel(int(1018744463545339924))
         await channel.send("The crystal of the day is ready!", view=CrystalView())
 
     @tasks.loop(hours=24)
     async def crystal(self):
         await self.bot.wait_until_ready()
-        guild = self.bot.get_guild(int(950937956682698862))
+        guild = self.bot.get_guild(int(771811457498218519))
         role = discord.utils.get(guild.roles, name="Has Viewed Crystal")
         for m in guild.members:
             if role in m.roles:
@@ -52,7 +52,7 @@ class Crystal(commands.Cog):
     @tasks.loop(hours=23)
     async def delete_last_crystal_view(self):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(int(950937956682698865))
+        channel = self.bot.get_channel(int(1018744463545339924))
         last_msg = await channel.fetch_message(channel.last_message_id)
         await last_msg.delete()
 
