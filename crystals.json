@@ -5,8 +5,36 @@
             "description": "A cool stone with cool properties!"
         },
         {
-            "name": "Gibby",
-            "description": "Gibbayyyyy!"
+            "name": "Clear Quartz",
+            "description": "A clear crystal considered a master healer and believed to support the entire energetic system."
+        },
+        {
+            "name": "Obsidian",
+            "description": "Believed to help process emotions and experiences and aid in letting go."
+        },
+        {
+            "name": "Sapphire",
+            "description": "Known as a stone of prosperity."
+        },
+        {
+            "name": "Turquoise",
+            "description": "Thought to soothe emotions and attract good luck."
+        },
+        {
+            "name": "Jade",
+            "description": "Another well-known stone for prosperity and luck."
+        },
+        {
+            "name": "Rose Quartz",
+            "description": "Sometimes referred to as the stone of love and believed to encourage love and trust."
+        },
+        {
+            "name": "Moonstone",
+            "description": "Said to prompt feelings of inner strength and growth."
+        },
+        {
+            "name": "Ruby",
+            "description": "Believed to support sexuality and sensuality."
         }
     ] 
 }

@@ -2,7 +2,6 @@ import os
 import discord
 
 from cogs.crystal import CrystalView
-from discord.ext import commands
 
 GUILD = discord.Object(id=771811457498218519)
 
@@ -22,5 +21,6 @@ class Test(commands.Bot):
                 await self.load_extension(f'cogs.{f[:-3]}')
 
 client = Test()
-client.run('MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs')
+client.run('MTAxNzE2NDgyNjAyOTYwNDk0NQ.GASe2V.XFhPGjQF0hbbeEkpn3-SOyI5olOJqRwZXK-BCY')
 # MTAxNzE2NDgyNjAyOTYwNDk0NQ.GASe2V.XFhPGjQF0hbbeEkpn3-SOyI5olOJqRwZXK-BCY
+# MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs
