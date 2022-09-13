@@ -21,6 +21,6 @@ class Test(commands.Bot):
                 await self.load_extension(f'cogs.{f[:-3]}')
 
 client = Test()
-client.run('MTAxNzE2NDgyNjAyOTYwNDk0NQ.GASe2V.XFhPGjQF0hbbeEkpn3-SOyI5olOJqRwZXK-BCY')
+client.run('MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs')
 # MTAxNzE2NDgyNjAyOTYwNDk0NQ.GASe2V.XFhPGjQF0hbbeEkpn3-SOyI5olOJqRwZXK-BCY
 # MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs
