@@ -49,12 +49,14 @@ class Crystal(commands.Cog):
             if role in m.roles:
                 await m.remove_roles(role)
 
-    @tasks.loop(hours=23)
+    @tasks.loop(hours=24)
     async def delete_last_crystal_view(self):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(int(1018744463545339924))
         last_msg = await channel.fetch_message(channel.last_message_id)
         await last_msg.delete()
+	# Post new crystal of the day view.
+	await channel.send("The crystal of the day is ready!", view=CrystalView())
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Crystal(bot))
