@@ -1,9 +1,16 @@
+import imp
+
+
 import os
 import json
 import random
 import discord
 
 from discord.ext import commands, tasks
+
+# Load out config file
+with open(os.getcwd() + '/config.json') as config:
+    data = json.load(config)
 
 class CrystalView(discord.ui.View):
     def __init__(self):
@@ -37,13 +44,13 @@ class Crystal(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(int(1018744463545339924))
+        channel = self.bot.get_channel(int(data['crystal_channel']))
         await channel.send("The crystal of the day is ready!", view=CrystalView())
 
     @tasks.loop(hours=24)
     async def crystal(self):
         await self.bot.wait_until_ready()
-        guild = self.bot.get_guild(int(771811457498218519))
+        guild = self.bot.get_guild(int(data['guild']))
         role = discord.utils.get(guild.roles, name="Has Viewed Crystal")
         for m in guild.members:
             if role in m.roles:
@@ -52,11 +59,11 @@ class Crystal(commands.Cog):
     @tasks.loop(hours=24)
     async def delete_last_crystal_view(self):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(int(1018744463545339924))
+        channel = self.bot.get_channel(int(data['crystal_channel']))
         last_msg = await channel.fetch_message(channel.last_message_id)
         await last_msg.delete()
-	# Post new crystal of the day view.
-	await channel.send("The crystal of the day is ready!", view=CrystalView())
+	    # Post new crystal of the day view.
+        await channel.send("The crystal of the day is ready!", view=CrystalView())
 
 async def setup(bot: commands.Bot) -> None:
     await bot.add_cog(Crystal(bot))

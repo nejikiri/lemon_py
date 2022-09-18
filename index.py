@@ -1,9 +1,15 @@
 import os
+import json
+from traceback import print_tb
 import discord
 
 from cogs.crystal import CrystalView
 
-GUILD = discord.Object(id=771811457498218519)
+# Load our config file
+with open('config.json', "r") as config:
+    data = json.load(config)
+
+GUILD = discord.Object(id=data['guild'])
 
 from discord.ext import commands
 
@@ -21,6 +27,4 @@ class Test(commands.Bot):
                 await self.load_extension(f'cogs.{f[:-3]}')
 
 client = Test()
-client.run('MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs')
-# MTAxNzE2NDgyNjAyOTYwNDk0NQ.GASe2V.XFhPGjQF0hbbeEkpn3-SOyI5olOJqRwZXK-BCY
-# MTAxODc1MjkxMzkzOTY0NDQ0Ng.Gnjk0Z.9CTwlTpSg7w9l_Z2FL_OLcLRHi-j6evXdxcNQs
+client.run(data['token'])
