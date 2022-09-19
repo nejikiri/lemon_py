@@ -1,10 +1,16 @@
+import os
 import json
-from urllib.request import urlopen
 
+from urllib.request import urlopen
 from discord.ext import commands
 
+# Load out config file
+with open(os.getcwd() + '/config.json') as config:
+    data = json.load(config)
+
 def fetch_image(query='wine', /):
-    url = urlopen(f'https://api.unsplash.com/photos/random?query={query}&client_id=BXuTAPKsP6M1eAy2s0sCOEb4MV1MNx0cmIBkiGn23hg').read()
+    unsplash_id = data['unsplash_id']
+    url = urlopen(f'https://api.unsplash.com/photos/random?query={query}&client_id={unsplash_id}').read()
     image = json.loads(url)
     return image['urls']['regular']
 
