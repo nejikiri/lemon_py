@@ -1,7 +1,6 @@
 import os
 import json
 import random
-from turtle import up
 import discord
 
 from __init__ import selection, DB
