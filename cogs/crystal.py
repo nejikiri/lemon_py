@@ -1,11 +1,10 @@
-import imp
-
-
 import os
 import json
 import random
+from turtle import up
 import discord
 
+from __init__ import selection, DB
 from discord.ext import commands, tasks
 
 # Load out config file
@@ -25,11 +24,16 @@ class CrystalView(discord.ui.View):
 
     @discord.ui.button(label="View Crystal", style=discord.ButtonStyle.blurple, custom_id="crystalpersist:purple")
     async def show_crystal(self, interaction: discord.Interaction, button: discord.Button):
-        role = discord.utils.get(interaction.guild.roles, name="Has Viewed Crystal")
-        if role in interaction.user.roles:
-            await interaction.response.send_message("Please wait till tomorrow to use this feature.", ephemeral=True)
-        await interaction.user.add_roles(role)
-        await interaction.response.send_message(f'{self.select_crystal()}', ephemeral=True)
+        selection.execute("SELECT * FROM crystal")
+        result = selection.fetchall()
+        for x in result:
+            if x[0] == interaction.user.name and x[1] == True:
+                await interaction.response.send_message("Please wait till tomorrow to use this feature.", ephemeral=True)
+            elif x[0] == interaction.user.name and x[1] == False:
+                update = "UPDATE crystal SET viewed = '{0}' WHERE user = '{1}'".format(1, interaction.user.name)
+                selection.execute(update)
+                DB.commit()
+                await interaction.response.send_message(f'{self.select_crystal()}', ephemeral=True)
 
     async def on_error(self, interaction: discord.Interaction, error: Exception, item: discord.ui.Button, /) -> None:
         # On error do nothing.
@@ -51,11 +55,11 @@ class Crystal(commands.Cog):
     async def crystal(self):
         await self.bot.wait_until_ready()
         guild = self.bot.get_guild(int(data['guild']))
-        role = discord.utils.get(guild.roles, name="Has Viewed Crystal")
         for m in guild.members:
-            if role in m.roles:
-                await m.remove_roles(role)
-
+            update = "UPDATE crystal SET viewed = '{0}' WHERE user = '{1}'".format(0, m.name)
+            selection.execute(update)
+            DB.commit()
+            
     @tasks.loop(hours=24)
     async def delete_last_crystal_view(self):
         await self.bot.wait_until_ready()
@@ -65,5 +69,5 @@ class Crystal(commands.Cog):
 	    # Post new crystal of the day view.
         await channel.send("The crystal of the day is ready!", view=CrystalView())
 
-async def setup(bot: commands.Bot) -> None:
+async def setup(bot: commands.Bot) -> None: 
     await bot.add_cog(Crystal(bot))
