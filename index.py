@@ -1,8 +1,9 @@
 import os
 import json
-from traceback import print_tb
+import mysql
 import discord
 
+from mysql.connector import connect
 from cogs.crystal import CrystalView
 
 # Load our config file
@@ -13,7 +14,7 @@ GUILD = discord.Object(id=data['guild'])
 
 from discord.ext import commands
 
-class Test(commands.Bot):
+class Lemon(commands.Bot):
     def __init__(self) -> None:
         super().__init__(command_prefix="!!", intents=discord.Intents.all())
 
@@ -26,5 +27,5 @@ class Test(commands.Bot):
             if f.endswith('.py'):
                 await self.load_extension(f'cogs.{f[:-3]}')
 
-client = Test()
+client = Lemon()
 client.run(data['token'])
