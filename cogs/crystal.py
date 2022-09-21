@@ -56,7 +56,7 @@ class Crystal(commands.Cog):
         guild = self.bot.get_guild(int(data['guild']))
         for m in guild.members:
             sql = "INSERT INTO crystal (user, viewed) VALUES (%s, %s)"
-            val = (m.user, False)
+            val = (m.name, False)
             selection.execute(sql, val)
             update = "UPDATE crystal SET viewed = '{0}' WHERE user = '{1}'".format(0, m.name)
             selection.execute(update)
