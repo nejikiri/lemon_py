@@ -63,10 +63,10 @@ class Crystal(commands.Cog):
     async def delete_last_crystal_view(self):
         await self.bot.wait_until_ready()
         channel = self.bot.get_channel(int(data['crystal_channel']))
-        last_msg = await channel.fetch_message(channel.last_message_id)
-        await last_msg.delete()
-	    # Post new crystal of the day view.
-        await channel.send("The crystal of the day is ready!", view=CrystalView())
+        async for m in channel.history(limit=1):
+            if m:
+                await m.delete()
+
 
 async def setup(bot: commands.Bot) -> None: 
     await bot.add_cog(Crystal(bot))
