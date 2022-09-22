@@ -47,8 +47,6 @@ class Crystal(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         await self.bot.wait_until_ready()
-        channel = self.bot.get_channel(int(data['crystal_channel']))
-        await channel.send("The crystal of the day is ready!", view=CrystalView())
 
     @tasks.loop(hours=24)
     async def crystal(self):
@@ -66,6 +64,7 @@ class Crystal(commands.Cog):
         async for m in channel.history(limit=1):
             if m:
                 await m.delete()
+                await channel.send("The crystal of the day is ready!", view=CrystalView())
 
 
 async def setup(bot: commands.Bot) -> None: 
