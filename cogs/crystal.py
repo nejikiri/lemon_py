@@ -43,10 +43,7 @@ class Crystal(commands.Cog):
         self.bot = bot
         self.crystal.start()
         self.delete_last_crystal_view.start()
-
-    @commands.Cog.listener()
-    async def on_ready(self):
-        await self.bot.wait_until_ready()
+        self.db_reconnect.start()
 
     @tasks.loop(hours=24)
     async def crystal(self):
@@ -65,6 +62,12 @@ class Crystal(commands.Cog):
             if m:
                 await m.delete()
                 await channel.send("The crystal of the day is ready!", view=CrystalView())
+    
+    @tasks.loop(hours=1)
+    async def db_reconnect(self):
+        await self.bot.wait_until_ready()
+        DB.ping(True)
+        print("Mysql connection reestablished.")
 
 
 async def setup(bot: commands.Bot) -> None: 
