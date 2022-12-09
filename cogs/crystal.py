@@ -45,6 +45,13 @@ class Crystal(commands.Cog):
         self.delete_last_crystal_view.start()
         self.db_reconnect.start()
 
+    @commands.Cog.listener()
+    async def on_member_join(self, member):
+        insert = "INSERT INTO crystal (user, viewed) values (%s, %s)"
+        values = (member.name, 0)
+        selection.execute(insert, values)
+        DB.commit()
+
     @tasks.loop(hours=24)
     async def crystal(self):
         await self.bot.wait_until_ready()
