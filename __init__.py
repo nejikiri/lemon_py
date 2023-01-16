@@ -13,6 +13,6 @@ DB = connect(
     password=data['db_pass'],
     database=data['db_name'],
     use_unicode=True,
-    charset='ascii',
 )
+DB.set_character_set('utf8')
 selection = DB.cursor()
