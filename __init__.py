@@ -14,5 +14,4 @@ DB = connect(
     database=data['db_name'],
     use_unicode=True,
 )
-DB.set_character_set('utf8')
 selection = DB.cursor()
