@@ -12,5 +12,7 @@ DB = connect(
     user=data['db_user'],
     password=data['db_pass'],
     database=data['db_name'],
+    use_unicode=True,
+    charset='ascii',
 )
 selection = DB.cursor()
